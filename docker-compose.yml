@@ -1,0 +1,29 @@
+version: "3"
+services:
+  mysql:
+    image: "mysql:8.0"
+    container_name: mysql
+    restart: always
+    ports:
+      - "3300:3306"
+    volumes:
+      - dbdata:/var/lib/mysql/data
+    environment:
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password1212
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+  app:
+    container_name: "flask_app"
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      WAIT_HOSTS: mysql:3306
+    build:
+      context: python
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+volumes:
+  dbdata:

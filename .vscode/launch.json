@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {"name":"Python: Current File","type":"python","request":"launch","program":"${file}","console":"integratedTerminal"},
+        {
+            "type": "aws-sam",
+            "request": "direct-invoke",
+            "name": "docker-compose-article:app.index (python3.8)",
+            "invokeTarget": {
+                "target": "code",
+                "projectRoot": "Python",
+                "lambdaHandler": "app.index"
+            },
+            "lambda": {
+                "runtime": "python3.8",
+                "payload": {},
+                "environmentVariables": {}
+            }
+        }
+    ]
+}
