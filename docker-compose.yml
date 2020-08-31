@@ -19,8 +19,6 @@ services:
     restart: always
     links:
       - mysql
-    environment:
-      WAIT_HOSTS: mysql:3306
     build:
       context: python
       dockerfile: Dockerfile

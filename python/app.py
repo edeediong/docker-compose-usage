@@ -10,7 +10,8 @@ config = {
     'user': 'user',
     'password': 'password1212',
     'port': '3306',
-    'database': 'data'
+    'database': 'data',
+    'auth_plugin':'mysql_native_password'
 }
 
 connection = mysql.connector.connect(**config)
