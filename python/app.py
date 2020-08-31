@@ -1,15 +1,19 @@
 from flask import Flask, render_template, request
-from flask_mysqldb import MySQL
+import  mysql.connector
+import json
+
 app = Flask(__name__)
 
 
-app.config['MYSQL_HOST'] = 'mysql'
-app.config['MYSQL_USER'] = 'user'
-app.config['MYSQL_PASSWORD'] = 'password1212'
-app.config['MYSQL_DB'] = 'database'
+config = {
+    'host': 'mysql',
+    'user': 'user',
+    'password': 'password1212',
+    'port': '3306',
+    'database': 'data'
+}
 
-mysql = MySQL(app)
-
+connection = mysql.connector.connect(**config)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -17,7 +21,7 @@ def index():
         details = request.form
         firstName = details['fname']
         lastName = details['lname']
-        cur = mysql.connection.cursor()
+        cur = connection.cursor()
         cur.execute("INSERT INTO MyUsers(firstName, lastName) VALUES (%s, %s)", (firstName, lastName))
         mysql.connection.commit()
         cur.close()

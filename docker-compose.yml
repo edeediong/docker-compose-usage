@@ -9,14 +9,14 @@ services:
     volumes:
       - dbdata:/var/lib/mysql/data
     environment:
-      - MYSQL_DATABASE=database
+      - MYSQL_DATABASE=data
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password1212
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
   app:
     container_name: "flask_app"
     restart: always
-    depends_on:
+    links:
       - mysql
     environment:
       WAIT_HOSTS: mysql:3306
