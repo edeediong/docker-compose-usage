@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import  mysql.connector
+import mysql.connector
 import json
 
 app = Flask(__name__)
@@ -23,7 +23,8 @@ def index():
         firstName = details['fname']
         lastName = details['lname']
         cur = connection.cursor()
-        cur.execute("INSERT INTO MyUsers(firstName, lastName) VALUES (%s, %s)", (firstName, lastName))
+        cur.execute("INSERT INTO MyUsers(firstName, lastName) \
+        VALUES (%s, %s)", (firstName, lastName))
         mysql.connection.commit()
         cur.close()
         return 'success'
